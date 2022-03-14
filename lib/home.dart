@@ -14,7 +14,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> textoTela = ['', '', '', '', '', '', '', '', '', 'X e O'];
   int zeroouum = 0;
   int qualQuadradoEh = 0;
-  int vezesJogadas = 1;
+  int vezesJogadas = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -232,6 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _setarTextoTela() {
     setState(() => textoTela[qualQuadradoEh] = xOro[zeroouum]);
+    vezesJogadas++;
     print(textoTela);
     print(vezesJogadas);
   }
@@ -239,10 +239,8 @@ class _MyHomePageState extends State<MyHomePage> {
   _trocarXpeloO() {
     if (zeroouum == 0) {
       zeroouum = 1;
-      vezesJogadas++;
     } else {
       zeroouum = 0;
-      vezesJogadas++;
     }
   }
 
