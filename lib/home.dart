@@ -15,6 +15,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int zeroouum = 0;
   int qualQuadradoEh = 0;
   int vezesJogadas = 0;
+  int quantasVezesXGanhou = 0;
+  int quantasVezesOGanhou = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,11 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.black,
         actions: [
           IconButton(
-              onPressed: () => _limparTabuleiro(),
+              onPressed: () {
+                _limparTabuleiro();
+                quantasVezesXGanhou = 0;
+                quantasVezesOGanhou = 0;
+              },
               icon: const Icon(Icons.refresh)),
         ],
         title: const Center(child: Text('Jogo da velha')),
@@ -32,6 +38,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.close, size: 100),
+              Text(
+                '$quantasVezesXGanhou x $quantasVezesOGanhou',
+                style: const TextStyle(fontSize: 45),
+              ),
+              const Icon(Icons.circle_outlined, size: 100),
+            ],
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -248,6 +265,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[0] == textoTela[1] &&
         textoTela[0] == textoTela[2] &&
         textoTela[0] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[0], context);
       _limparTabuleiro();
       return;
@@ -256,6 +274,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[3] == textoTela[4] &&
         textoTela[3] == textoTela[5] &&
         textoTela[3] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[3], context);
       _limparTabuleiro();
       return;
@@ -264,6 +283,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[6] == textoTela[7] &&
         textoTela[6] == textoTela[8] &&
         textoTela[6] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[6], context);
       _limparTabuleiro();
       return;
@@ -272,6 +292,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[0] == textoTela[3] &&
         textoTela[0] == textoTela[6] &&
         textoTela[0] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[0], context);
       _limparTabuleiro();
       return;
@@ -280,6 +301,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[1] == textoTela[4] &&
         textoTela[1] == textoTela[7] &&
         textoTela[1] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[1], context);
       _limparTabuleiro();
       return;
@@ -288,6 +310,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[2] == textoTela[5] &&
         textoTela[2] == textoTela[8] &&
         textoTela[2] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[2], context);
       _limparTabuleiro();
       return;
@@ -296,6 +319,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[0] == textoTela[4] &&
         textoTela[0] == textoTela[8] &&
         textoTela[0] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[0], context);
       _limparTabuleiro();
       return;
@@ -304,6 +328,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[2] == textoTela[4] &&
         textoTela[2] == textoTela[6] &&
         textoTela[2] != '') {
+      _quemGanhou();
       _showAlertDialog('Vencedor', textoTela[2], context);
       _limparTabuleiro();
       return;
@@ -324,12 +349,12 @@ class _MyHomePageState extends State<MyHomePage> {
     vezesJogadas = 0;
   }
 
-  _showAlertDialog(String s, String textoTela, context) {
+  _showAlertDialog(String s, String? textoTela, context) {
     showDialog<String>(
         context: context,
         builder: (context) => AlertDialog(
               title: Text(s),
-              content: Text(textoTela),
+              content: Text(textoTela!),
               actions: [
                 TextButton(
                   onPressed: () {
@@ -343,6 +368,18 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _buildVezdequem() {
     String texto = xOro[zeroouum];
-    return Text("Vez do $texto");
+    return Text(
+      "Vez do $texto",
+      style: const TextStyle(fontSize: 30),
+    );
+  }
+
+  _quemGanhou() {
+    if (textoTela[qualQuadradoEh] == 'X') {
+      quantasVezesXGanhou++;
+    }
+    if (textoTela[qualQuadradoEh] == 'O') {
+      quantasVezesOGanhou++;
+    }
   }
 }
