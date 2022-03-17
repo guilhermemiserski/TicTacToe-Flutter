@@ -38,17 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.close, size: 100),
-              Text(
-                '$quantasVezesXGanhou x $quantasVezesOGanhou',
-                style: const TextStyle(fontSize: 45),
-              ),
-              const Icon(Icons.circle_outlined, size: 100),
-            ],
-          ),
+          _buildPlacar(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -249,8 +239,6 @@ class _MyHomePageState extends State<MyHomePage> {
   _setarTextoTela() {
     setState(() => textoTela[qualQuadradoEh] = xOro[zeroouum]);
     vezesJogadas++;
-    print(textoTela);
-    print(vezesJogadas);
   }
 
   _trocarXpeloO() {
@@ -381,5 +369,19 @@ class _MyHomePageState extends State<MyHomePage> {
     if (textoTela[qualQuadradoEh] == 'O') {
       quantasVezesOGanhou++;
     }
+  }
+
+  _buildPlacar() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Icon(Icons.close, size: 100),
+        Text(
+          '$quantasVezesXGanhou x $quantasVezesOGanhou',
+          style: const TextStyle(fontSize: 45),
+        ),
+        const Icon(Icons.circle_outlined, size: 100),
+      ],
+    );
   }
 }
